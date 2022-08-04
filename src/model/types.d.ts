@@ -12,9 +12,4 @@ declare namespace Model {
   type Race = import("./Race").Race;
 
   type BettingTicket = import("./BettingTicket").BettingTicket;
-
-  interface HeroImage {
-    url: string;
-    hash: string;
-  }
 }
