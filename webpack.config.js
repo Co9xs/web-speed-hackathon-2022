@@ -22,13 +22,6 @@ module.exports = [
     module: {
       rules: [
         {
-          resourceQuery: (value) => {
-            const query = new URLSearchParams(value);
-            return query.has("raw");
-          },
-          type: "asset/source",
-        },
-        {
           exclude: /[\\/]esm[\\/]/,
           test: /\.jsx?$/,
           use: {
