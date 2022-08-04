@@ -20,11 +20,11 @@ module.exports = [
   {
     devtool: false,
     entry: path.join(SRC_ROOT, "client/index.jsx"),
-    mode: "development",
+    mode: process.env.NODE_ENV,
     module: {
       rules: [
         {
-          exclude: /[\\/]esm[\\/]/,
+          exclude: /node_modules/,
           test: /\.jsx?$/,
           use: {
             loader: "babel-loader",
@@ -63,7 +63,7 @@ module.exports = [
     devtool: false,
     entry: path.join(SRC_ROOT, "server/index.js"),
     externals: [nodeExternals()],
-    mode: "development",
+    mode: process.env.NODE_ENV,
     module: {
       rules: [
         {
