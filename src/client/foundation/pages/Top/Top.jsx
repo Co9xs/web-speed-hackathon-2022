@@ -11,7 +11,6 @@ import { Heading } from "../../components/typographies/Heading";
 import { useAuthorizedFetch } from "../../hooks/useAuthorizedFetch";
 import { useFetch } from "../../hooks/useFetch";
 import { Color, Radius, Space } from "../../styles/variables";
-import { isSameDay } from "../../utils/DateUtils";
 import { authorizedJsonFetcher, jsonFetcher } from "../../utils/HttpUtils";
 
 import { ChargeDialog } from "./internal/ChargeDialog";
@@ -79,7 +78,7 @@ function useTodayRacesWithAnimation(races) {
 
 /** @type {React.VFC} */
 export const Top = () => {
-  const { date = moment().format("YYYY-MM-DD") } = useParams();
+  const { date } = useParams();
 
   const ChargeButton = styled.button`
     background: ${Color.mono[700]};
@@ -99,7 +98,16 @@ export const Top = () => {
     authorizedJsonFetcher,
   );
 
-  const { data: raceData } = useFetch("/api/races", jsonFetcher);
+  const since = date
+    ? moment(date).startOf("day").unix()
+    : moment().startOf("day").unix();
+  const until = date
+    ? moment(date).endOf("day").unix()
+    : moment().endOf("day").unix();
+  const { data: raceData } = useFetch(
+    `/api/races?since=${since}&until=${until}`,
+    jsonFetcher,
+  );
 
   const handleClickChargeButton = useCallback(() => {
     if (chargeDialogRef.current === null) {
@@ -113,17 +121,7 @@ export const Top = () => {
     revalidate();
   }, [revalidate]);
 
-  const todayRaces =
-    raceData != null
-      ? [...raceData.races]
-          .sort(
-            (/** @type {Model.Race} */ a, /** @type {Model.Race} */ b) =>
-              moment(a.startAt) - moment(b.startAt),
-          )
-          .filter((/** @type {Model.Race} */ race) =>
-            isSameDay(race.startAt, date),
-          )
-      : [];
+  const todayRaces = raceData != null ? [...raceData.races] : [];
   const todayRacesToShow = useTodayRacesWithAnimation(todayRaces);
 
   return (
