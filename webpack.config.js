@@ -6,6 +6,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
+const MomentTimezoneDataPlugin = require("moment-timezone-data-webpack-plugin");
 
 function abs(...args) {
   return path.join(__dirname, ...args);
@@ -30,12 +31,7 @@ module.exports = [
           use: {
             loader: "babel-loader",
             options: {
-              presets: [
-                [
-                  "@babel/preset-env",
-                ],
-                "@babel/preset-react",
-              ],
+              presets: [["@babel/preset-env"], "@babel/preset-react"],
             },
           },
         },
@@ -61,6 +57,9 @@ module.exports = [
         patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
       }),
       new BundleAnalyzerPlugin(),
+      new MomentTimezoneDataPlugin({
+        matchCountries: "JP",
+      }),
     ],
     resolve: {
       extensions: [".js", ".jsx"],
@@ -80,12 +79,7 @@ module.exports = [
           use: {
             loader: "babel-loader",
             options: {
-              presets: [
-                [
-                  "@babel/preset-env",
-                ],
-                "@babel/preset-react",
-              ],
+              presets: [["@babel/preset-env"], "@babel/preset-react"],
             },
           },
         },
