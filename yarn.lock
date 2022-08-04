@@ -9879,15 +9879,8 @@ __metadata:
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
     "@babel/runtime": ^7.17.2
-<<<<<<< HEAD
     "@fortawesome/fontawesome-free": ^5.15.4
-=======
-    "@fortawesome/fontawesome-svg-core": ^6.1.2
-    "@fortawesome/free-regular-svg-icons": ^6.1.2
-    "@fortawesome/free-solid-svg-icons": ^6.1.2
-    "@fortawesome/react-fontawesome": ^0.2.0
     "@loadable/component": ^5.15.2
->>>>>>> 96315a3 (faet: ページ単位で code splitting)
     "@stylelint/postcss-css-in-js": ^0.37.2
     "@types/lodash": ^4.14.178
     "@types/react": ^17.0.38
