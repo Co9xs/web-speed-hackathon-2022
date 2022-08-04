@@ -33,10 +33,6 @@ module.exports = [
               presets: [
                 [
                   "@babel/preset-env",
-                  {
-                    modules: "cjs",
-                    spec: true,
-                  },
                 ],
                 "@babel/preset-react",
               ],
@@ -87,10 +83,6 @@ module.exports = [
               presets: [
                 [
                   "@babel/preset-env",
-                  {
-                    modules: "cjs",
-                    spec: true,
-                  },
                 ],
                 "@babel/preset-react",
               ],
