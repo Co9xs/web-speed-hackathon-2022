@@ -35,24 +35,38 @@ export const RaceResult = () => {
     authorizedJsonFetcher,
   );
 
-  if (data == null) {
-    return <Container>Loading...</Container>;
-  }
-
   return (
     <Container>
       <Spacer mt={Space * 2} />
-      <Heading as="h1">{data.name}</Heading>
-      <p>
-        開始 {formatTime(data.startAt)} 締切 {formatTime(data.closeAt)}
-      </p>
+      <Heading as="h1">{data ? data.name : "loading race name..."}</Heading>
+      {data ? (
+        <p>
+          開始 {formatTime(data.startAt)} 締切 {formatTime(data.closeAt)}
+        </p>
+      ) : (
+        <p>開始 ..:.. 締切 ..:..</p>
+      )}
 
       <Spacer mt={Space * 2} />
 
       <Section dark shrink>
         <LiveBadge>Live</LiveBadge>
         <Spacer mt={Space * 2} />
-        <TrimmedImage height={225} src={data.image} width={400} />
+        {data ? (
+          <TrimmedImage
+            height={225}
+            src={data?.image}
+            width={400}
+          />
+        ) : (
+          <div
+            style={{
+              border: "1px solid black",
+              height: "225px",
+              width: "400px",
+            }}
+          />
+        )}
       </Section>
 
       <Spacer mt={Space * 2} />

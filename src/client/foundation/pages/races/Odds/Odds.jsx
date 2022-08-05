@@ -58,26 +58,41 @@ export const Odds = () => {
     [],
   );
 
-  if (data == null) {
-    return <Container>Loading...</Container>;
-  }
-
-  const isRaceClosed = moment(data.closeAt).isBefore(new Date());
+  const isRaceClosed = data ? moment(data.closeAt).isBefore(new Date()) : true;
 
   return (
     <Container>
       <Spacer mt={Space * 2} />
-      <Heading as="h1">{data.name}</Heading>
-      <p>
-        開始 {formatTime(data.startAt)} 締切 {formatTime(data.closeAt)}
-      </p>
+      <Heading as="h1">{data ? data.name : "loading race name..."}</Heading>
+      {data ? (
+        <p>
+          開始 {formatTime(data.startAt)} 締切 {formatTime(data.closeAt)}
+        </p>
+      ) : (
+        <p>開始 ..:.. 締切 ..:..</p>
+      )}
 
       <Spacer mt={Space * 2} />
 
       <Section dark shrink>
         <LiveBadge>Live</LiveBadge>
         <Spacer mt={Space * 2} />
-        <TrimmedImage height={225} src={data.image} width={400} />
+        {data ? (
+          <TrimmedImage
+            height={225}
+            src={data?.image}
+            style={{ objectFit: "fill" }}
+            width={400}
+          />
+        ) : (
+          <div
+            style={{
+              border: "1px solid black",
+              height: "225px",
+              width: "400px",
+            }}
+          />
+        )}
       </Section>
 
       <Spacer mt={Space * 2} />
@@ -104,22 +119,38 @@ export const Odds = () => {
         <Heading as="h2">オッズ表</Heading>
 
         <Spacer mt={Space * 2} />
-        <OddsTable
-          entries={data.entries}
-          isRaceClosed={isRaceClosed}
-          odds={data.trifectaOdds}
-          onClickOdds={handleClickOdds}
-        />
 
+        {data ? (
+          <OddsTable
+            entries={data.entries}
+            isRaceClosed={isRaceClosed}
+            odds={data.trifectaOdds}
+            onClickOdds={handleClickOdds}
+          />
+        ) : (
+          <div />
+        )}
         <Spacer mt={Space * 4} />
         <Heading as="h2">人気順</Heading>
 
         <Spacer mt={Space * 2} />
-        <OddsRankingList
-          isRaceClosed={isRaceClosed}
-          odds={data.trifectaOdds}
-          onClickOdds={handleClickOdds}
-        />
+        {data ? (
+          <OddsRankingList
+            isRaceClosed={isRaceClosed}
+            odds={data.trifectaOdds}
+            onClickOdds={handleClickOdds}
+          />
+        ) : (
+          <OddsRankingList
+            isRaceClosed={isRaceClosed}
+            odds={[...new Array(50)].map((_, i) => ({
+              id: i + 1,
+              key: [0, 0, 0],
+              odds: 0,
+            }))}
+            onClickOdds={handleClickOdds}
+          />
+        )}
       </Section>
 
       <TicketVendingModal ref={modalRef} odds={oddsKeyToBuy} raceId={raceId} />
