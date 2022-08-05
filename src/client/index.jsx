@@ -1,4 +1,3 @@
-import "./foundation/side-effects";
 import "moment/locale/ja";
 
 import React from "react";

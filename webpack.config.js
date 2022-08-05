@@ -33,6 +33,7 @@ module.exports = [
           use: {
             loader: "babel-loader",
             options: {
+              plugins: ["@babel/plugin-transform-runtime"],
               presets: [["@babel/preset-env"], "@babel/preset-react"],
             },
           },
@@ -89,6 +90,7 @@ module.exports = [
           use: {
             loader: "babel-loader",
             options: {
+              plugins: ["@babel/plugin-transform-runtime"],
               presets: [["@babel/preset-env"], "@babel/preset-react"],
             },
           },
