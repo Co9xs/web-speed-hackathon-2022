@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+import { PeaceIcon } from "../../../../../components/icons/PeaceIcon";
 import { Color, FontSize, Space } from "../../../../../styles/variables";
 
 const Wrapper = styled.div`
@@ -22,7 +23,7 @@ const Wrapper = styled.div`
 export const RaceResultSection = () => {
   return (
     <Wrapper>
-      <i className="far fa-hand-peace" />
+      <PeaceIcon />
       <div>結果はまだありません</div>
     </Wrapper>
   );

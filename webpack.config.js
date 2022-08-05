@@ -20,7 +20,8 @@ const DIST_PUBLIC = abs("./dist/public");
 /** @type {Array<import('webpack').Configuration>} */
 module.exports = [
   {
-    devtool: false,
+    devtool:
+      process.env.NODE_ENV === "development" ? "inline-source-map" : false,
     entry: path.join(SRC_ROOT, "client/index.jsx"),
     mode: process.env.NODE_ENV,
     module: {
@@ -70,7 +71,8 @@ module.exports = [
     target: "web",
   },
   {
-    devtool: false,
+    devtool:
+      process.env.NODE_ENV === "development" ? "inline-source-map" : false,
     entry: path.join(SRC_ROOT, "server/index.js"),
     externals: [nodeExternals()],
     mode: process.env.NODE_ENV,
