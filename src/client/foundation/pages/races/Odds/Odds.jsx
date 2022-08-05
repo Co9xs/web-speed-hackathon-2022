@@ -81,7 +81,6 @@ export const Odds = () => {
           <TrimmedImage
             height={225}
             src={data?.image}
-            style={{ objectFit: "fill" }}
             width={400}
           />
         ) : (

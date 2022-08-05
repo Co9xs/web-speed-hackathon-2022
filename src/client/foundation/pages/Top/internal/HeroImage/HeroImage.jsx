@@ -1,5 +1,7 @@
 import React from "react";
 
+import { createCloudinaryUrl } from "../../../../utils";
+
 /**
  * @typedef Props
  * @type {object}
@@ -11,7 +13,7 @@ export const HeroImage = ({ url }) => {
   return (
     <img
       alt="Hero Image"
-      src={url}
+      src={createCloudinaryUrl(url, { crop: "fill" })}
       style={{ display: "block", margin: "0 auto" }}
     />
   );
