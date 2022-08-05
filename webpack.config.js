@@ -4,6 +4,7 @@ const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const MomentTimezoneDataPlugin = require("moment-timezone-data-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require("webpack");
 const BundleAnalyzerPlugin =
   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
@@ -63,6 +64,10 @@ module.exports = [
           () => {},
       new MomentTimezoneDataPlugin({
         matchCountries: "JP",
+      }),
+      new webpack.IgnorePlugin({
+        contextRegExp: /moment$/,
+        resourceRegExp: /^\.\/locale$/,
       }),
     ],
     resolve: {
